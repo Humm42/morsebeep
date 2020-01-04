@@ -1,0 +1,49 @@
+.Dd January 1, 2020
+.Dt MORSEBEEP 1
+.Os
+.Sh NAME
+.Nm morsebeep
+.Nd "beep morse codes"
+.Sh SYNOPSIS
+.Nm
+.Op Fl s
+.Op Ar file
+.Sh DESCRIPTION
+.Nm
+reads morse code from stdin or
+.Ar file
+and beeps it out.
+.Lp
+.Nm
+accepts options in the syntax of the flag Go package.
+Available options:
+.Bl -tag -width ".Fl s"
+.It Fl s
+accept dots (.) and hyphons (-) rather than \*(Lqdit\*(Rq and \*(Lqdaw\*(Rq
+.El
+.Sh INPUT FORMAT
+Morse code is accepted in the format of
+.Xr morse 1 :
+one letter per line, an empty line denotes a space.
+Letters are series of space-separated \*(Lqdit\*(Rqs, \*(Lqdaw\*(Rqs and
+\*(Lqdah\*(Rqs.
+With the
+.Fl s
+option, Letters are series of dots (.) and hyphens (-); spaces are ignored.
+.Sh IMPLEMENTATION NOTES
+.Nm
+is very inefficiently written in Go and uses
+.Xr beep 1 .
+.Sh EXIT STATUS
+.Ex -std
+.Sh EXAMPLES
+.Dl % morse -s 'Hey, girl!' | morsebeep -s
+.Sh SEE ALSO
+.Xr beep 1 ,
+.Xr morse 1
+.Sh AUTHORS
+.An Humm
+.Sh BUGS
+Small, six little legs and extremely nasty.
+.Lp
+there should be an option changing the duration of a dit
