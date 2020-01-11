@@ -66,14 +66,20 @@ func beepRunes(str string) {
 }
 
 func main() {
-	// TODO: check for `beep` executable
+	var err error
+
+	_, err = exec.LookPath("beep")
+	if err != nil {
+		fmt.Fprintln(os.Stderr, "executable “beep” not found")
+		os.Exit(1)
+	}
+
 	var sFlag bool
 	flag.BoolVar(&sFlag, "s", false, "accept dashes and dots")
 	flag.Parse()
 	args := flag.Args()
 
 	var inputFile *os.File
-	var err error
 
 	switch len(args) {
 	case 0:
